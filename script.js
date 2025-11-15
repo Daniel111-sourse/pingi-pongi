@@ -61,6 +61,16 @@ function movePaddles() {
 function renderBall() {
     canvas.fillRect(ball.x, ball.y, ball.width, ball.height);
 }
+function resetGame((ball.x < 0 ||  ball.x > map.width) && !ball.isReseted) {
+    if ((ball.x < 0 || ball.x > map.width) && !ball.isResetted) {
+        ball.isResetted = true;
+        setTimeout(() => {
+            ball.x = map.width / 2;
+            ball.y = map.height / 2;
+            ball.isResetted = false;
+        }, 1000);
+    }
+}
 
 
 function loop (){
@@ -71,6 +81,7 @@ function loop (){
     renderBall()
     moveBall()
     movePaddles()
+    resetGame()
     requestAnimationFrame(loop)
 }
 document.addEventListener('keydown', (event) => {
@@ -86,4 +97,5 @@ document.addEventListener('keyup', (event) => {
         leftPaddle.dy = 0
     } 
 })
+
 requestAnimationFrame(loop)
